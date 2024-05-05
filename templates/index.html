@@ -90,12 +90,18 @@
             /* Por defecto ocultamos el botón de detener */
         }
 
+        #logoBarranqui {
+            text-align: right; 
+        }
+
         #startButton,
         #stopButton {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
+
+        
     </style>
 </head>
 
@@ -113,8 +119,11 @@
             <div id="response-info">
 
             </div>
+        </div><br><br>
+        <div id="logoBarranqui">
+            <img src="static/barranquiia.png" alt="Barranqui-IA" width="120"><br>
         </div>
-        <div id="hackaton">Barranqui-IA</div>
+        <button id="copyButton">Copiar texto</button>
     </div>
 
     <script>
@@ -171,6 +180,7 @@
                             .replace(/(Fecha)/g, '<br><b>Fecha </b>')
                             .replace(/(Hora)/g, '<br><b>Hora </b>')
                             .replace(/(Nombre de paciente)/g, '<br><b>Nombre de paciente </b>')
+                            .replace(/(Edad)/g, '<br><b>Edad </b>')
                             .replace(/(Motivo de consulta)/g, '<br><b>Motivo de consulta </b>')
                             .replace(/(Antecedentes personales)/g, '<br><b>Antecedentes Personales </b>')
                             .replace(/(Antecedentes familiares)/g, '<br><b>Antecedentes Familiares </b>')
@@ -188,6 +198,21 @@
                     .catch(error => console.error('Error:', error));
             }
         });
+        // Agrega el evento para el botón de copiar
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            // Selecciona y copia el texto dentro del responseDiv
+            const responseText = responseDiv.innerText; // O textContent, según tus necesidades
+            navigator.clipboard.writeText(responseText)
+                .then(() => {
+                    alert('Texto copiado correctamente');
+                })
+                .catch(err => {
+                    console.error('Error al copiar el texto:', err);
+                    alert('Error al copiar el texto');
+                });
+        });
+
     </script>
 </body>
 
