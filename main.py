@@ -24,6 +24,9 @@ system=f"""Objetivo
   Diagnóstico -> Es el diagnostico que el medico da segun su criterio al paciente, si no llega, debes solicitarlo, es un dato indispensable.\n
   CIE10 -> Es el codigo segun normativa Cie10 del diagnostico, debes asignarlo automaticamente, sino lo encuentras, omite el campo.\n
   Ordenamiento -> Corresponde a lo que ordena el medico segun el estado del paciente, ya sea dar el alta o salida, dejar en observación, remitir a otro servicios como especialistas o consulta prioritaria o dejar en observación, si no llega, debes solicitarlo, es un dato indispensable.\n
+  Tratamiento -> Corresponde al tratamiento medico ordenado compuesto por medicinas, terapias, medicamentos, reposo, incapacidad y posologias, es un campo indispensable, si no llega en el prompt, debes pedirlo.
+  Resumen -> Generas un resumen con todos los datos que consideres relevantes a nivel medico y/o clinico que te hayan dado. Ajustalos lo mas profesionalmente posible.
+  Observaciones -> Data que consideres de caracter disruptivo, inusual o que afecte la atención medica.
 
   Rol
   Tarea ->Analizar la transcripción recibida y rescatar de ella el texto relevante a contexto medico o clinico y llenar los campos descritos en el estilo.
