@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-CO">
 
 <head>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
@@ -73,26 +73,42 @@
 
         #response {
             text-align: left;
-            /* Agregar esta línea para alinear el contenido a la izquierda */
         }
 
         #hackaton {
-            text-align: rigth;
-            /* Agregar esta línea para alinear el contenido a la izquierda */
             color: #007bff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #stopButton {
+            display: none;
+            /* Por defecto ocultamos el botón de detener */
+        }
+
+        #startButton,
+        #stopButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <img src="static/logo.png" alt="ParlaDocsy" width="400"><br>
-
-        <button id="startButton">Registrar Atención</button>
-        <button id="stopButton" style="display:none">Transcribir Atención</button>
+        <img src="static/logo.jpeg" alt="Medic-IA" width="400"><br>
+        <div class="button-container">
+            <button id="startButton">Registrar Atención</button>
+            <button id="stopButton" style="display:none">Transcribir Atención</button>
+        </div>
         <div id="transcription-title">Transcripción Literal</div>
         <div id="transcription"></div>
-        <div id="response-title">Transcripción de ParlaDocsy</div>
+        <div id="response-title">Transcripción de Medic-IA</div>
         <div id="response">
             <div id="response-info">
 
@@ -151,16 +167,22 @@
                     .then(response => response.json())
                     .then(data => {
                         // Agregar saltos de línea antes de los términos específicos
-                        let responseText = data.response.replace(/(Fecha->)/g, '<br><b>Fecha: </b>')
-                            .replace(/(Hora->)/g, '<br><b>Hora: </b>')
-                            .replace(/(Nombre de paciente ->)/g, '<br><b>Nombre de paciente: </b>')
-                            .replace(/(Motivo de consulta ->)/g, '<br><b>Motivo de consulta: </b>')
-                            .replace(/(Diagnóstico ->)/g, '<br><b>Diagnóstico: </b>')
-                            .replace(/(CIE10 ->)/g, '<br><b>CIE10: </b>')
-                            .replace(/(Ordenamiento ->)/g, '<br><b>Ordenamiento: </b>')
-                            .replace(/(Resumen ->)/g, '<br><b>Resumen: </b>')
-                            .replace(/(Tratamiento ->)/g, '<br><b>Tratamiento: </b>')
-                            .replace(/(Observaciones ->)/g, '<br><b>Observaciones: </b>');
+                        let responseText = data.response.replace(/(->)/g, '')
+                            .replace(/(Fecha)/g, '<br><b>Fecha </b>')
+                            .replace(/(Hora)/g, '<br><b>Hora </b>')
+                            .replace(/(Nombre de paciente)/g, '<br><b>Nombre de paciente </b>')
+                            .replace(/(Motivo de consulta)/g, '<br><b>Motivo de consulta </b>')
+                            .replace(/(Antecedentes personales)/g, '<br><b>Antecedentes Personales </b>')
+                            .replace(/(Antecedentes familiares)/g, '<br><b>Antecedentes Familiares </b>')
+                            .replace(/(Examen Fisico)/g, '<br><b>Examén Físico </b>')
+                            .replace(/(Análisis)/g, '<br><b>Análisis </b>')
+                            .replace(/(Diagnóstico)/g, '<br><b>Diagnóstico </b>')
+                            .replace(/(CIE10)/g, '<br><b>CIE10 </b>')
+                            .replace(/(Plan de manejo diagnóstico)/g, '<br><b>Plan de manejo diagnóstico </b>')
+                            .replace(/(Resumen)/g, '<br><b>Resumen </b>')
+                            .replace(/(Tratamiento)/g, '<br><b>Tratamiento </b>')
+                            .replace(/(Seguimiento)/g, '<br><b>Seguimiento </b>')
+                            .replace(/(Observaciones)/g, '<br><b>Observaciones </b>');
                         responseDiv.innerHTML = responseText; // Mostrar el texto modificado
                     })
                     .catch(error => console.error('Error:', error));
